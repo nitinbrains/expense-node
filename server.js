@@ -4,6 +4,7 @@ require('dotenv').config();
 const errorHandler = require('./handlers/errorHandler');
 const mongoose = require('mongoose');
 const userRoutes = require("./modules/users/users.routes");
+const transationRoutes = require("./modules/transactions/transactions.route");
 
 mongoose.connect(process.env.MONGO_CONNECTION, {}
 ).then(() => {
@@ -17,9 +18,11 @@ const port = 4000;
 
 //models initialize
 require('./models/users.model');
+require('./models/transactions.model');
 
 //routes initialize
 app.use("/api/users",userRoutes)
+app.use("/api/transactions",transationRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
